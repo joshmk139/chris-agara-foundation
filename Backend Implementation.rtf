@@ -1,0 +1,318 @@
+// verify payment endpoint//
+
+
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 .SFNS-Regular_wdth_opsz110000_GRAD_wght2580000;}
+{\colortbl;\red255\green255\blue255;\red45\green45\blue45;\red246\green246\blue246;}
+{\*\expandedcolortbl;;\cssrgb\c23137\c23137\c23137;\cssrgb\c97255\c97255\c97255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh15380\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\pardeftab720\sa120\partightenfactor0
+
+\f1\b\fs19\fsmilli9756 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1.). Verify Payment Endpoint
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 const express = require('express');\
+const https = require('https');\
+const router = express.Router();\
+\
+// Your Paystack Secret Key (DO NOT expose publicly!)\
+const PAYSTACK_SECRET_KEY = 'sk_live_your_secret_key_here';\
+\
+router.post('/verify-payment', async (req, res) => \{\
+    const \{ reference, amount, email \} = req.body;\
+    \
+    // Verify with Paystack\
+    const options = \{\
+        hostname: 'api.paystack.co',\
+        port: 443,\
+        path: `/transaction/verify/$\{reference\}`,\
+        method: 'GET',\
+        headers: \{\
+            Authorization: `Bearer $\{PAYSTACK_SECRET_KEY\}`\
+        \}\
+    \};\
+    \
+    const paystackReq = https.request(options, (paystackRes) => \{\
+        let data = '';\
+        \
+        paystackRes.on('data', (chunk) => \{\
+            data += chunk;\
+        \});\
+        \
+        paystackRes.on('end', () => \{\
+            const response = JSON.parse(data);\
+            \
+            // Verify amount matches\
+            if (response.data.amount === amount * 100) \{\
+                res.json(response);\
+            \} else \{\
+                res.status(400).json(\{\
+                    status: 'error',\
+                    message: 'Amount mismatch'\
+                \});\
+            \}\
+        \});\
+    \});\
+    \
+    paystackReq.on('error', (error) => \{\
+        res.status(500).json(\{\
+            status: 'error',\
+            message: error.message\
+        \});\
+    \});\
+    \
+    paystackReq.end();\
+\});\
+\
+module.exports = router;\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+
+2.) // save donation endpoint//
+
+
+\f1\b\fs19\fsmilli9756 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Save Donation Endpoint\
+
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+const Donation = require('./models/Donation'); // Your Donation model\
+\
+router.post('/save-donation', async (req, res) => \{\
+    try \{\
+        const \{\
+            reference,\
+            amount,\
+            frequency,\
+            donor_name,\
+            donor_email,\
+            donor_phone,\
+            donor_location,\
+            dedication,\
+            anonymous,\
+            newsletter,\
+            payment_data,\
+            created_at\
+        \} = req.body;\
+        \
+        // Create donation record\
+        const donation = new Donation(\{\
+            reference,\
+            amount,\
+            frequency,\
+            donor: \{\
+                name: donor_name,\
+                email: donor_email,\
+                phone: donor_phone,\
+                location: donor_location\
+            \},\
+            dedication,\
+            anonymous,\
+            newsletter,\
+            paystack_data: payment_data,\
+            status: 'completed',\
+            created_at: new Date(created_at)\
+        \});\
+        \
+        await donation.save();\
+        \
+        res.json(\{\
+            status: 'success',\
+            message: 'Donation saved successfully',\
+            donation_id: donation._id\
+        \});\
+        \
+    \} catch (error) \{\
+        res.status(500).json(\{\
+            status: 'error',\
+            message: error.message\
+        \});\
+    \}\
+\});\
+\
+\
+\
+\
+\
+\
+
+
+3.) // send receipt endpoint//
+
+
+\f1\b\fs19\fsmilli9756 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Send Receipt Endpoint\
+
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+\
+const nodemailer = require('nodemailer');\
+\
+// Configure email transporter\
+const transporter = nodemailer.createTransporter(\{\
+    host: 'smtp.gmail.com', // or your SMTP server\
+    port: 587,\
+    secure: false,\
+    auth: \{\
+        user: 'your-email@gmail.com',\
+        pass: 'your-app-password'\
+    \}\
+\});\
+\
+router.post('/send-receipt', async (req, res) => \{\
+    try \{\
+        const \{\
+            reference,\
+            donor_name,\
+            donor_email,\
+            amount,\
+            frequency,\
+            dedication\
+        \} = req.body;\
+        \
+        // Email template\
+        const emailHTML = `\
+            <!DOCTYPE html>\
+            <html>\
+            <head>\
+                <style>\
+                    body \{ font-family: Arial, sans-serif; line-height: 1.6; \}\
+                    .header \{ background: #00274F; color: white; padding: 20px; text-align: center; \}\
+                    .content \{ padding: 20px; \}\
+                    .amount \{ font-size: 2em; color: #C9A14B; font-weight: bold; \}\
+                    .footer \{ background: #f4f4f4; padding: 15px; text-align: center; \}\
+                </style>\
+            </head>\
+            <body>\
+                <div class="header">\
+                    <h1>Chris Agara Foundation</h1>\
+                    <p>Donation Receipt</p>\
+                </div>\
+                <div class="content">\
+                    <h2>Thank You, $\{donor_name\}!</h2>\
+                    <p>Your generous donation will help transform lives through education.</p>\
+                    \
+                    <h3>Donation Details:</h3>\
+                    <p><strong>Amount:</strong> <span class="amount">\uc0\u8358 $\{amount.toLocaleString()\}</span></p>\
+                    <p><strong>Frequency:</strong> $\{frequency\}</p>\
+                    <p><strong>Transaction Reference:</strong> $\{reference\}</p>\
+                    <p><strong>Date:</strong> $\{new Date().toLocaleDateString()\}</p>\
+                    $\{dedication ? `<p><strong>Dedication:</strong> $\{dedication\}</p>` : ''\}\
+                    \
+                    <p style="margin-top: 20px;">This donation is tax-deductible. Please keep this receipt for your records.</p>\
+                </div>\
+                <div class="footer">\
+                    <p>Chris Agara Foundation | Building futures through education</p>\
+                    <p>Contact: info@chrisagarafoundation.org</p>\
+                </div>\
+            </body>\
+            </html>\
+        `;\
+        \
+        // Send email\
+        await transporter.sendMail(\{\
+            from: '"Chris Agara Foundation" <donations@chrisagarafoundation.org>',\
+            to: donor_email,\
+            subject: `Donation Receipt - \uc0\u8358 $\{amount.toLocaleString()\} - Chris Agara Foundation`,\
+            html: emailHTML\
+        \});\
+        \
+        res.json(\{\
+            status: 'success',\
+            message: 'Receipt sent successfully'\
+        \});\
+        \
+    \} catch (error) \{\
+        res.status(500).json(\{\
+            status: 'error',\
+            message: error.message\
+        \});\
+    \}\
+\});\
+\
+\
+\
+\
+\
+\
+\
+
+
+4.) // MongoDB Donation Model//
+
+
+\f1\b\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 MongoDB Donation Model:
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+const mongoose = require('mongoose');\
+\
+const donationSchema = new mongoose.Schema(\{\
+    reference: \{ type: String, required: true, unique: true \},\
+    amount: \{ type: Number, required: true \},\
+    frequency: \{ type: String, enum: ['one-time', 'monthly'], default: 'one-time' \},\
+    donor: \{\
+        name: \{ type: String, required: true \},\
+        email: \{ type: String, required: true \},\
+        phone: String,\
+        location: String\
+    \},\
+    dedication: String,\
+    anonymous: \{ type: Boolean, default: false \},\
+    newsletter: \{ type: Boolean, default: false \},\
+    paystack_data: Object,\
+    status: \{ type: String, enum: ['pending', 'completed', 'failed'], default: 'pending' \},\
+    created_at: \{ type: Date, default: Date.now \}\
+\});\
+\
+module.exports = mongoose.model('Donation', donationSchema);\
+\
+\
+\
+\
+\
+\
+
+
+5.) // API Base URL//\
+\
+const API_BASE_URL = 'https://api.yourdomain.com';}
+
+
+
+
+// Required Packages for application endpoint://
+
+npm install express mongoose multer nodemailer cors dotenv
+
+
+// API endpoints //
+
+POST /api/scholarship/apply
+
+ // Returns //
+
+
+{
+  "success": true,
+  "applicationId": "CAF-SCH-1730411234-789",
+  "applicantEmail": "student@email.com"
+}
+
+

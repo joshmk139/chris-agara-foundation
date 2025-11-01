@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apply | Chris Agara Foundation Scholarship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="bg-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">
+                <a href="index.html" class="logo" aria-label="Home">CAF</a>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About & Mission</a></li>
+                    <li><a href="scholarship.html">Scholarship</a></li>
+                    <li><a href="charity.html">Charity</a></li>
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board</a></li>
+                    <li><a class="btn btn-secondary" href="apply.html" aria-current="page">Apply</a></li>
+                    <li><a class="btn btn-primary" href="donate.html">Donate</a></li>
+                    <li><a class="btn btn-primary" href="join.html">Join</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+        <section class="page-hero">
+            <h1>Scholarship Application</h1>
+            <p class="lead">Chris Agara Foundation Scholarship Program</p>
+            <p class="muted">Complete all sections carefully. You will receive a confirmation email with your application ID.</p>
+        </section>
+
+        <!-- Important Notice -->
+        <section class="application-notice">
+            <div class="notice-card">
+                <h3>⚠️ Important Requirements</h3>
+                <ul>
+                    <li><strong>Year 1 Students:</strong> Attach admission letter and certificate of origin</li>
+                    <li><strong>Year 2-Final Year Students:</strong> Attach previous year result slip and certificate of origin</li>
+                    <li><strong>All Students:</strong> Attach CGPA printout and passport photograph</li>
+                    <li>Ensure all fields are filled accurately before submission</li>
+                </ul>
+            </div>
+        </section>
+
+        <form class="application-form" id="scholarshipForm" action="/api/apply" method="POST" enctype="multipart/form-data" novalidate>
+            <!-- Section 1: Personal Information -->
+            <fieldset class="form-section">
+                <legend>👤 Personal Information</legend>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="fullName">Full Name (as in admission letter) *</label>
+                        <input id="fullName" name="fullName" type="text" required placeholder="Surname, First Name, Middle Name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sex *</label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input id="age" name="age" type="number" required min="15" max="50" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maritalStatus">Marital Status *</label>
+                        <select id="maritalStatus" name="maritalStatus" required>
+                            <option value="">Select</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input id="phone" name="phone" type="tel" required placeholder="08012345678" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input id="email" name="email" type="email" required placeholder="your.email@example.com" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Section 2: Origin Information -->
+            <fieldset class="form-section">
+                <legend>🏠 Origin Information</legend>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="stateOfOrigin">State of Origin *</label>
+                        <input id="stateOfOrigin" name="stateOfOrigin" type="text" required placeholder="Cross River State" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lga">Local Government Area *</label>
+                        <input id="lga" name="lga" type="text" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="village">Name of Village/Town *</label>
+                        <input id="village" name="village" type="text" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactAddress">Contact Address *</label>
+                        <textarea id="contactAddress" name="contactAddress" rows="3" required placeholder="Full residential address"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Section 3: Academic Information -->
+            <fieldset class="form-section">
+                <legend>🎓 Academic Information</legend>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="matricNumber">Matriculation Number *</label>
+                        <input id="matricNumber" name="matricNumber" type="text" required placeholder="e.g., 20/ENG/CS/001" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jambNumber">JAMB Registration Number *</label>
+                        <input id="jambNumber" name="jambNumber" type="text" required placeholder="12345678AB" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="faculty">Faculty *</label>
+                        <input id="faculty" name="faculty" type="text" required placeholder="e.g., Faculty of Science" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <input id="department" name="department" type="text" required placeholder="e.g., Computer Science" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearOfStudy">Year of Study *</label>
+                        <select id="yearOfStudy" name="yearOfStudy" required>
+                            <option value="">Select</option>
+                            <option value="1">Year 1</option>
+                            <option value="2">Year 2</option>
+                            <option value="3">Year 3</option>
+                            <option value="4">Year 4</option>
+                            <option value="5">Year 5</option>
+                            <option value="6">Year 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="academicSession">Academic Session *</label>
+                        <input id="academicSession" name="academicSession" type="text" required placeholder="e.g., 2024/2025" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cgpa">Current CGPA *</label>
+                        <input id="cgpa" name="cgpa" type="text" required placeholder="e.g., 3.75" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hodName">HOD's Name *</label>
+                        <input id="hodName" name="hodName" type="text" required placeholder="Prof./Dr. Full Name" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Section 4: Family & Sponsorship -->
+            <fieldset class="form-section">
+                <legend>👨‍👩‍👧 Family & Sponsorship Information</legend>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="parentPhone">Parent/Guardian Phone Number *</label>
+                        <input id="parentPhone" name="parentPhone" type="tel" required placeholder="08012345678" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentOccupation">Parent/Guardian Occupation *</label>
+                        <input id="parentOccupation" name="parentOccupation" type="text" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Who are your sponsors in school? *</label>
+                    <div class="sponsor-options">
+                        <label class="radio-option">
+                            <input type="radio" name="sponsor" value="both-parents" required />
+                            <span>Both Parents</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sponsor" value="single-parent" required />
+                            <span>Single Parent</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sponsor" value="self-sponsored" required />
+                            <span>Self Sponsored</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sponsor" value="others" required />
+                            <span>Others</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="otherSponsorField" style="display:none">
+                    <label for="otherSponsor">Please specify other sponsor</label>
+                    <input id="otherSponsor" name="otherSponsor" type="text" />
+                </div>
+            </fieldset>
+
+            <!-- Section 5: Referees -->
+            <fieldset class="form-section">
+                <legend>📝 Referees (Provide 2 Referees)</legend>
+                
+                <div class="referee-section">
+                    <h4>Referee 1</h4>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="referee1Name">Full Name *</label>
+                            <input id="referee1Name" name="referee1Name" type="text" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="referee1Phone">Phone Number *</label>
+                            <input id="referee1Phone" name="referee1Phone" type="tel" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="referee-section">
+                    <h4>Referee 2</h4>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="referee2Name">Full Name *</label>
+                            <input id="referee2Name" name="referee2Name" type="text" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="referee2Phone">Phone Number *</label>
+                            <input id="referee2Phone" name="referee2Phone" type="tel" required />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Section 6: Reason for Application -->
+            <fieldset class="form-section">
+                <legend>✍️ Statement of Need</legend>
+                <div class="form-group">
+                    <label for="reasonForApplication">Why are you applying for this scholarship? *</label>
+                    <textarea id="reasonForApplication" name="reasonForApplication" rows="6" required placeholder="Explain your financial need, academic goals, and how this scholarship will help you..."></textarea>
+                    <small class="form-hint">Minimum 100 words. Be honest and specific.</small>
+                </div>
+            </fieldset>
+
+            <!-- Section 7: Document Uploads -->
+            <fieldset class="form-section">
+                <legend>📄 Required Documents</legend>
+                
+                <div class="upload-grid">
+                    <div class="upload-item">
+                        <label for="passportPhoto">
+                            <span class="upload-icon">📷</span>
+                            <strong>Passport Photograph *</strong>
+                            <small>JPEG/PNG, max 2MB</small>
+                        </label>
+                        <input id="passportPhoto" name="passportPhoto" type="file" accept="image/jpeg,image/png" required />
+                        <span class="file-name" id="passportPhotoName">No file chosen</span>
+                    </div>
+
+                    <div class="upload-item">
+                        <label for="cgpaPrintout">
+                            <span class="upload-icon">📊</span>
+                            <strong>CGPA Printout *</strong>
+                            <small>PDF, max 5MB</small>
+                        </label>
+                        <input id="cgpaPrintout" name="cgpaPrintout" type="file" accept="application/pdf" required />
+                        <span class="file-name" id="cgpaPrintoutName">No file chosen</span>
+                    </div>
+
+                    <div class="upload-item">
+                        <label for="certificateOfOrigin">
+                            <span class="upload-icon">📜</span>
+                            <strong>Certificate of Origin *</strong>
+                            <small>PDF, max 5MB</small>
+                        </label>
+                        <input id="certificateOfOrigin" name="certificateOfOrigin" type="file" accept="application/pdf" required />
+                        <span class="file-name" id="certificateOfOriginName">No file chosen</span>
+                    </div>
+
+                    <div class="upload-item" id="year1DocsGroup">
+                        <label for="admissionLetter">
+                            <span class="upload-icon">🎓</span>
+                            <strong>Admission Letter (Year 1 Only) *</strong>
+                            <small>PDF, max 5MB</small>
+                        </label>
+                        <input id="admissionLetter" name="admissionLetter" type="file" accept="application/pdf" />
+                        <span class="file-name" id="admissionLetterName">No file chosen</span>
+                    </div>
+
+                    <div class="upload-item" id="year2PlusDocsGroup" style="display:none">
+                        <label for="previousResults">
+                            <span class="upload-icon">📊</span>
+                            <strong>Previous Year Result Slip (Year 2+) *</strong>
+                            <small>PDF, max 5MB</small>
+                        </label>
+                        <input id="previousResults" name="previousResults" type="file" accept="application/pdf" />
+                        <span class="file-name" id="previousResultsName">No file chosen</span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Section 8: Declaration -->
+            <fieldset class="form-section">
+                <legend>✔️ Declaration</legend>
+                <div class="declaration-box">
+                    <label class="checkbox-large">
+                        <input type="checkbox" name="terms" id="termsCheckbox" required />
+                        <span>I hereby declare that all information provided in this application is true and accurate to the best of my knowledge. I understand that providing false information may result in disqualification or termination of the scholarship.</span>
+                    </label>
+                    <label class="checkbox-large">
+                        <input type="checkbox" name="consent" id="consentCheckbox" required />
+                        <span>I consent to the Chris Agara Foundation processing my personal data for scholarship assessment and communication purposes.</span>
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button class="btn btn-primary btn-large" type="submit" id="submitBtn">
+                    📤 Submit Application
+                </button>
+                <p class="form-footer-note">Please review all information carefully before submission. You will receive a confirmation email with your application ID.</p>
+            </div>
+
+            <div aria-live="polite" class="sr-only" id="formStatus"></div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong>Chris Agara Foundation</strong>
+                <p class="muted">Building futures through education and community impact.</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board of Trustees</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container tiny">© 2025 Chris Agara Foundation. All rights reserved.</div>
+    </footer>
+
+    <script>
+    // Year of study conditional logic
+    const yearOfStudySelect = document.getElementById('yearOfStudy');
+    const year1Docs = document.getElementById('year1DocsGroup');
+    const year2PlusDocs = document.getElementById('year2PlusDocsGroup');
+    const admissionLetterInput = document.getElementById('admissionLetter');
+    const previousResultsInput = document.getElementById('previousResults');
+
+    yearOfStudySelect.addEventListener('change', function() {
+        const year = parseInt(this.value);
+        
+        if (year === 1) {
+            year1Docs.style.display = 'block';
+            year2PlusDocs.style.display = 'none';
+            admissionLetterInput.required = true;
+            previousResultsInput.required = false;
+        } else if (year > 1) {
+            year1Docs.style.display = 'none';
+            year2PlusDocs.style.display = 'block';
+            admissionLetterInput.required = false;
+            previousResultsInput.required = true;
+        } else {
+            year1Docs.style.display = 'none';
+            year2PlusDocs.style.display = 'none';
+            admissionLetterInput.required = false;
+            previousResultsInput.required = false;
+        }
+    });
+
+    // Sponsor "Others" field logic
+    const sponsorRadios = document.querySelectorAll('input[name="sponsor"]');
+    const otherSponsorField = document.getElementById('otherSponsorField');
+    const otherSponsorInput = document.getElementById('otherSponsor');
+
+    sponsorRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'others') {
+                otherSponsorField.style.display = 'block';
+                otherSponsorInput.required = true;
+            } else {
+                otherSponsorField.style.display = 'none';
+                otherSponsorInput.required = false;
+            }
+        });
+    });
+
+    // File upload name display
+    const fileInputs = [
+        { input: 'passportPhoto', display: 'passportPhotoName' },
+        { input: 'cgpaPrintout', display: 'cgpaPrintoutName' },
+        { input: 'certificateOfOrigin', display: 'certificateOfOriginName' },
+        { input: 'admissionLetter', display: 'admissionLetterName' },
+        { input: 'previousResults', display: 'previousResultsName' }
+    ];
+
+    fileInputs.forEach(item => {
+        const input = document.getElementById(item.input);
+        const display = document.getElementById(item.display);
+        
+        if (input && display) {
+            input.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    display.textContent = this.files[0].name;
+                    display.classList.add('file-selected');
+                } else {
+                    display.textContent = 'No file chosen';
+                    display.classList.remove('file-selected');
+                }
+            });
+        }
+    });
+
+    // Form validation and submission
+    const form = document.getElementById('scholarshipForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const API_BASE_URL = 'https://api.chrisagarafoundation.org'; // Replace with your actual API URL
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Basic validation
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-small"></span> Submitting Application...';
+
+        try {
+            // Prepare FormData for file uploads
+            const formData = new FormData();
+            
+            // Add all text fields
+            formData.append('fullName', document.getElementById('fullName').value);
+            formData.append('sex', document.getElementById('sex').value);
+            formData.append('age', document.getElementById('age').value);
+            formData.append('maritalStatus', document.getElementById('maritalStatus').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('stateOfOrigin', document.getElementById('stateOfOrigin').value);
+            formData.append('lga', document.getElementById('lga').value);
+            formData.append('village', document.getElementById('village').value);
+            formData.append('contactAddress', document.getElementById('contactAddress').value);
+            formData.append('matricNumber', document.getElementById('matricNumber').value);
+            formData.append('jambNumber', document.getElementById('jambNumber').value);
+            formData.append('faculty', document.getElementById('faculty').value);
+            formData.append('department', document.getElementById('department').value);
+            formData.append('yearOfStudy', document.getElementById('yearOfStudy').value);
+            formData.append('academicSession', document.getElementById('academicSession').value);
+            formData.append('cgpa', document.getElementById('cgpa').value);
+            formData.append('hodName', document.getElementById('hodName').value);
+            formData.append('parentPhone', document.getElementById('parentPhone').value);
+            formData.append('parentOccupation', document.getElementById('parentOccupation').value);
+            formData.append('sponsor', document.querySelector('input[name="sponsor"]:checked').value);
+            
+            const otherSponsor = document.getElementById('otherSponsor').value;
+            if (otherSponsor) formData.append('otherSponsor', otherSponsor);
+            
+            formData.append('referee1Name', document.getElementById('referee1Name').value);
+            formData.append('referee1Phone', document.getElementById('referee1Phone').value);
+            formData.append('referee2Name', document.getElementById('referee2Name').value);
+            formData.append('referee2Phone', document.getElementById('referee2Phone').value);
+            formData.append('reasonForApplication', document.getElementById('reasonForApplication').value);
+            
+            // Add file uploads
+            const passportPhoto = document.getElementById('passportPhoto').files[0];
+            const cgpaPrintout = document.getElementById('cgpaPrintout').files[0];
+            const certificateOfOrigin = document.getElementById('certificateOfOrigin').files[0];
+            
+            if (passportPhoto) formData.append('passportPhoto', passportPhoto);
+            if (cgpaPrintout) formData.append('cgpaPrintout', cgpaPrintout);
+            if (certificateOfOrigin) formData.append('certificateOfOrigin', certificateOfOrigin);
+            
+            // Year-specific documents
+            const yearOfStudy = parseInt(document.getElementById('yearOfStudy').value);
+            if (yearOfStudy === 1) {
+                const admissionLetter = document.getElementById('admissionLetter').files[0];
+                if (admissionLetter) formData.append('admissionLetter', admissionLetter);
+            } else if (yearOfStudy > 1) {
+                const previousResults = document.getElementById('previousResults').files[0];
+                if (previousResults) formData.append('previousResults', previousResults);
+            }
+            
+            formData.append('terms', document.getElementById('termsCheckbox').checked);
+            formData.append('consent', document.getElementById('consentCheckbox').checked);
+            formData.append('submissionDate', new Date().toISOString());
+
+            // Submit to backend API
+            const response = await fetch(`${API_BASE_URL}/api/scholarship/apply`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Show success message
+                showSuccessMessage(result.applicationId, result.applicantEmail);
+            } else {
+                throw new Error(result.message || 'Submission failed');
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('There was an error submitting your application. Please try again or contact us at info@chrisagarafoundation.org');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '📤 Submit Application';
+        }
+    });
+
+    function showSuccessMessage(applicationId, email) {
+        // Hide form, show success message
+        form.style.display = 'none';
+        
+        const successHTML = `
+            <div class="success-message" style="text-align:center;padding:3rem;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);max-width:700px;margin:2rem auto;">
+                <div style="font-size:4rem;color:var(--gold);margin-bottom:1rem;">✔️</div>
+                <h2 style="color:var(--navy);margin-bottom:1rem;">Application Submitted Successfully!</h2>
+                <p style="font-size:1.1rem;line-height:1.8;margin:1rem 0;">Your scholarship application has been received.</p>
+                <div style="background:rgba(201,161,75,.1);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--gold);">
+                    <p style="margin:0;font-weight:600;color:var(--navy);">Application ID: <span style="color:var(--gold);font-size:1.2rem;">${applicationId}</span></p>
+                </div>
+                <p style="margin:1.5rem 0;">A confirmation email has been sent to <strong>${email}</strong> with your application details.</p>
+                <p style="color:var(--muted);font-size:.95rem;">Please save your Application ID for future reference. You will be contacted if you are shortlisted for an interview.</p>
+                <div style="margin-top:2rem;">
+                    <a href="index.html" class="btn btn-primary">Return Home</a>
+                    <a href="scholarship.html" class="btn btn-secondary" style="margin-left:1rem;">Learn More</a>
+                </div>
+            </div>
+        `;
+        
+        const container = document.querySelector('.container');
+        container.innerHTML = successHTML;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Join / Volunteer | Chris Agara Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="bg-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">
+                <a href="index.html" class="logo" aria-label="Home">CAF</a>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About & Mission</a></li>
+                    <li><a href="scholarship.html">Scholarship</a></li>
+                    <li><a href="charity.html">Charity</a></li>
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board</a></li>
+                    <li><a class="btn btn-secondary" href="apply.html">Apply</a></li>
+                    <li><a class="btn btn-primary" href="donate.html">Donate</a></li>
+                    <li><a class="btn btn-primary" href="join.html" aria-current="page">Join</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <h1 class="hero-title-animated">Join the Chris Agara Charity Initiative</h1>
+            <p class="lead">Be Part of Something That Changes Lives</p>
+        </section>
+
+        <!-- Introduction -->
+        <section class="join-intro">
+            <div class="card">
+                <p>The <strong>Chris Agara Charity Initiative</strong> welcomes everyone — whether you're seeking support or ready to lend a helping hand.</p>
+                <p>Each year, we reach out to widows, the elderly, people with disabilities, and families in need across Cross River State, providing food items, care packages, and hope during festive seasons and community drives.</p>
+            </div>
+        </section>
+
+        <!-- Pathway Selection -->
+        <section class="join-pathways">
+            <h2 class="section-title">By joining us, you can:</h2>
+            <div class="pathway-grid">
+                <div class="pathway-card" data-pathway="beneficiary">
+                    <div class="pathway-icon">🎁</div>
+                    <h3>Receive Support</h3>
+                    <p>Register to benefit from our food and relief programs.</p>
+                    <button type="button" class="btn btn-primary pathway-btn" data-pathway="beneficiary">Register for Support</button>
+                </div>
+                <div class="pathway-card" data-pathway="volunteer">
+                    <div class="pathway-icon">🤝</div>
+                    <h3>Volunteer</h3>
+                    <p>Help us distribute food items and assist during outreach events.</p>
+                    <button type="button" class="btn btn-secondary pathway-btn" data-pathway="volunteer">Join as Volunteer</button>
+                </div>
+                <div class="pathway-card" data-pathway="both">
+                    <div class="pathway-icon">❤️</div>
+                    <h3>Spread Kindness</h3>
+                    <p>Be part of a community that uplifts others through compassion and service.</p>
+                    <button type="button" class="btn btn-gold pathway-btn" data-pathway="both">Join the Movement</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Form -->
+        <form class="join-form" id="joinForm" action="/api/join" method="POST" novalidate style="display:none;">
+            <h2 id="formTitle" class="form-title">Registration Form</h2>
+            <input type="hidden" id="pathwayType" name="pathwayType" value="" />
+
+            <!-- Common Fields -->
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label for="jname">Full Name *</label>
+                    <input id="jname" name="fullName" type="text" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="jphone">Phone Number *</label>
+                    <input id="jphone" name="phone" type="tel" required placeholder="08012345678" />
+                </div>
+
+                <div class="form-group">
+                    <label for="jemail">Email Address</label>
+                    <input id="jemail" name="email" type="email" placeholder="optional" />
+                </div>
+
+                <div class="form-group">
+                    <label for="jlga">Local Government Area *</label>
+                    <input id="jlga" name="lga" type="text" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="jvillage">Village/Community *</label>
+                    <input id="jvillage" name="village" type="text" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="jaddress">Home Address *</label>
+                    <input id="jaddress" name="address" type="text" required />
+                </div>
+            </div>
+
+            <!-- Beneficiary-Specific Fields -->
+            <div id="beneficiaryFields" style="display:none;">
+                <fieldset class="form-section">
+                    <legend>🎁 Support Category</legend>
+                    <div class="form-group">
+                        <label>I am: *</label>
+                        <div class="sponsor-options">
+                            <label class="radio-option">
+                                <input type="radio" name="category" value="widow" />
+                                <span>Widow</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="category" value="elderly" />
+                                <span>Elderly</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="category" value="disabled" />
+                                <span>Person with Disability</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="category" value="displaced" />
+                                <span>Displaced Person</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="category" value="family" />
+                                <span>Family in Need</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="householdSize">Household Size *</label>
+                        <input id="householdSize" name="householdSize" type="number" min="1" />
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Volunteer-Specific Fields -->
+            <div id="volunteerFields" style="display:none;">
+                <fieldset class="form-section">
+                    <legend>🤝 Volunteer Information</legend>
+                    <div class="form-group">
+                        <label>Areas of Interest *</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox"><input type="checkbox" name="interests" value="distribution" /> Food Distribution</label>
+                            <label class="checkbox"><input type="checkbox" name="interests" value="logistics" /> Logistics & Coordination</label>
+                            <label class="checkbox"><input type="checkbox" name="interests" value="outreach" /> Community Outreach</label>
+                            <label class="checkbox"><input type="checkbox" name="interests" value="documentation" /> Documentation & Photography</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <input id="availability" name="availability" type="text" placeholder="e.g., Weekends, December, etc." />
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Additional Message -->
+            <div class="form-group">
+                <label for="jmsg">Additional Information</label>
+                <textarea id="jmsg" name="message" rows="4" placeholder="Tell us more about your situation or how you'd like to help..."></textarea>
+            </div>
+
+            <!-- Consent -->
+            <div class="form-group">
+                <label class="checkbox-large">
+                    <input type="checkbox" name="consent" id="consentCheck" required />
+                    <span>I consent to be contacted by the Chris Agara Foundation regarding this registration.</span>
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-secondary" type="button" id="backToPathways">Back to Options</button>
+                <button class="btn btn-primary btn-large" type="submit" id="submitJoin">Submit Registration</button>
+            </div>
+            <div aria-live="polite" class="sr-only" id="formStatus"></div>
+        </form>
+
+        <!-- Together Section -->
+        <section class="join-together" id="togetherSection">
+            <div class="together-card">
+                <h2>Together, We Make a Difference</h2>
+                <p>Whether you need help or wish to help others, there's a place for you here.</p>
+                <p class="together-quote">Join today and become part of a growing movement of care, community, and love in action.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong>Chris Agara Foundation</strong>
+                <p class="muted">Building futures through education and community impact.</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board of Trustees</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container tiny">© 2025 Chris Agara Foundation. All rights reserved.</div>
+    </footer>
+
+    <script>
+    // Elements
+    const pathwayBtns = document.querySelectorAll('.pathway-btn');
+    const joinForm = document.getElementById('joinForm');
+    const togetherSection = document.getElementById('togetherSection');
+    const beneficiaryFields = document.getElementById('beneficiaryFields');
+    const volunteerFields = document.getElementById('volunteerFields');
+    const pathwayTypeInput = document.getElementById('pathwayType');
+    const formTitle = document.getElementById('formTitle');
+    const backBtn = document.getElementById('backToPathways');
+    const submitBtn = document.getElementById('submitJoin');
+
+    // Pathway selection
+    pathwayBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pathway = this.getAttribute('data-pathway');
+            pathwayTypeInput.value = pathway;
+            
+            // Show form, hide together section
+            joinForm.style.display = 'block';
+            togetherSection.style.display = 'none';
+            
+            // Update form title and show relevant fields
+            if (pathway === 'beneficiary') {
+                formTitle.textContent = '🎁 Register for Support';
+                beneficiaryFields.style.display = 'block';
+                volunteerFields.style.display = 'none';
+                // Make beneficiary fields required
+                document.querySelectorAll('#beneficiaryFields input[type="radio"]').forEach(r => r.required = true);
+                document.getElementById('householdSize').required = true;
+                // Make volunteer fields not required
+                document.querySelectorAll('#volunteerFields input[type="checkbox"]').forEach(c => c.required = false);
+            } else if (pathway === 'volunteer') {
+                formTitle.textContent = '🤝 Volunteer Registration';
+                beneficiaryFields.style.display = 'none';
+                volunteerFields.style.display = 'block';
+                // Make volunteer fields required (at least one checkbox)
+                document.querySelectorAll('#volunteerFields input[type="checkbox"]').forEach(c => c.required = false);
+                // Make beneficiary fields not required
+                document.querySelectorAll('#beneficiaryFields input[type="radio"]').forEach(r => r.required = false);
+                document.getElementById('householdSize').required = false;
+            } else if (pathway === 'both') {
+                formTitle.textContent = '❤️ Join the Movement';
+                beneficiaryFields.style.display = 'block';
+                volunteerFields.style.display = 'block';
+                // Make both required
+                document.querySelectorAll('#beneficiaryFields input[type="radio"]').forEach(r => r.required = true);
+                document.getElementById('householdSize').required = true;
+            }
+            
+            // Scroll to form
+            joinForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Back to pathways button
+    backBtn.addEventListener('click', function() {
+        joinForm.style.display = 'none';
+        togetherSection.style.display = 'block';
+        joinForm.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Form submission
+    joinForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Basic validation
+        if (!joinForm.checkValidity()) {
+            joinForm.reportValidity();
+            return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-small"></span> Submitting...';
+
+        // Simulate form submission (replace with actual API call)
+        setTimeout(() => {
+            alert('Registration submitted successfully! We will contact you soon.');
+            joinForm.reset();
+            joinForm.style.display = 'none';
+            togetherSection.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Submit Registration';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 2000);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+    </script>
+</body>
+</html>

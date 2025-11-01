@@ -1,0 +1,840 @@
+/*  serif headings, clean grid, calm colorway.
+   File: css/style.css */
+
+/* --------- Design Tokens --------- */
+:root{
+  --navy:#00274F;
+  --purple:#5B2E8A;
+  --gold:#C9A14B;
+  --bg:#FAF9F7;
+  --text:#222222;
+  --muted:#6b7280;
+  --white:#ffffff;
+  --max:1120px;
+  --radius:8px;
+  --radius-sm:4px;
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+  --shadow-sm:0 2px 10px rgba(0,0,0,.06);
+  --gap:1rem;
+  --spacing:3rem;
+}
+
+/* --------- Base --------- */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  line-height:1.75;
+  font-weight:400;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  position:relative;
+  min-height:100vh;
+}
+
+/* Background Slideshow */
+.bg-slideshow{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden}
+.bg-slideshow::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(250,249,247,.94);z-index:2}
+.bg-slideshow .slide{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;animation:slideshow 24s infinite}
+.bg-slideshow .slide:nth-child(1){animation-delay:0s;background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=2000&auto=format&fit=crop')}
+.bg-slideshow .slide:nth-child(2){animation-delay:8s;background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2000&auto=format&fit=crop')}
+.bg-slideshow .slide:nth-child(3){animation-delay:16s;background-image:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=2000&auto=format&fit=crop')}
+
+@keyframes slideshow{
+  0%{opacity:0}
+  4%{opacity:1}
+  33.33%{opacity:1}
+  37.33%{opacity:0}
+  100%{opacity:0}
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.container{max-width:var(--max);margin:0 auto;padding:0 1rem;position:relative;z-index:1}
+.muted{color:var(--muted)}
+.lead{font-size:1.25rem;line-height:1.7;color:var(--text);font-weight:400;margin:1.5rem 0}
+.tiny{font-size:.9rem;color:var(--muted)}
+.sr-only{position:absolute;left:-9999px}
+
+/* Section spacing */
+section{margin:3rem 0}
+section + section{margin-top:4rem}
+@media (max-width:768px){
+  section{margin:2rem 0}
+  section + section{margin-top:3rem}
+}
+
+/* --------- Typography --------- */
+h1,h2,h3,h4{
+  font-family:Merriweather, 'Libre Baskerville', Georgia, serif;
+  color:var(--navy);
+  line-height:1.3;
+  margin:0 0 1rem 0;
+  font-weight:700;
+  letter-spacing:-0.01em;
+}
+h1{font-size:2.75rem;line-height:1.2}
+h2{font-size:2rem;margin-top:3rem;margin-bottom:1.25rem}
+h3{font-size:1.5rem;margin-top:2rem}
+h4{font-size:1.25rem}
+p{margin:1rem 0;line-height:1.8;font-size:1.05rem}
+@media (max-width:768px){
+  h1{font-size:2rem}
+  h2{font-size:1.6rem}
+  h3{font-size:1.3rem}
+}
+
+/* --------- Header / Nav --------- */
+.skip-link{
+  position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+}
+.skip-link:focus{
+  left:1rem;top:1rem;width:auto;height:auto;background:#fff;color:#000;
+  padding:.5rem .75rem;border-radius:6px;z-index:1000;
+}
+
+.site-header{
+  background:var(--navy);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+  position:sticky;
+  top:0;
+  z-index:100;
+  transition:all .3s ease;
+}
+.site-header.scrolled{
+  box-shadow:0 4px 16px rgba(0,0,0,.15);
+  border-bottom-color:var(--gold);
+}
+.site-header .container{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 1rem;
+  transition:padding .3s ease;
+}
+.site-header.scrolled .container{
+  padding:.85rem 1rem;
+}
+.logo{
+  color:var(--gold);text-decoration:none;font-weight:800;font-size:1.5rem;
+  letter-spacing:1px;
+  transition:color .3s ease, transform .3s ease;
+  font-family:Merriweather, serif;
+}
+.logo:hover{color:#fff;transform:scale(1.05)}
+.site-nav ul{
+  list-style:none;margin:0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
+}
+.site-nav a{
+  text-decoration:none;color:#fff;padding:.6rem .8rem;border-radius:4px;
+  transition:background .3s ease, color .3s ease;
+  font-weight:500;
+  font-size:.95rem;
+}
+.site-nav a:hover{background:rgba(201,161,75,.15);color:var(--gold)}
+.site-nav a[aria-current="page"]{font-weight:600;color:var(--gold);border-bottom:2px solid var(--gold)}
+
+/* --------- Buttons --------- */
+.btn{
+  display:inline-block;border-radius:999px;padding:.65rem 1rem;text-decoration:none;
+  font-weight:700;line-height:1;border:2px solid transparent;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  cursor:pointer;
+}
+.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 6px 20px rgba(102,199,244,.4)}
+.btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+button.btn{font-family:inherit}
+.btn-primary{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-primary:hover{background:#b8902d;box-shadow:0 8px 24px rgba(201,161,75,.4)}
+.btn-secondary{background:transparent;color:var(--navy);border-color:var(--navy);border-width:2px}
+.btn-secondary:hover{background:var(--navy);color:#fff}
+.btn-link{background:transparent;color:var(--navy);text-decoration:underline;padding:0;border:none}
+
+/* --------- Hero --------- */
+.hero{padding:2rem 0}
+.hero-grid{display:grid;gap:1rem}
+@media (min-width:768px){.hero-grid{grid-template-columns:1fr 1fr}}
+.hero-card{
+  border-radius:var(--radius);
+  padding:1.25rem;
+  color:#fff;
+  box-shadow:var(--shadow);
+  min-height:220px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-card.navy{background:var(--navy)}
+.hero-card.purple{background:var(--purple)}
+.hero-title{color:#fff;margin:0 0 .5rem}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;align-items:center}
+
+/* --------- Sections / Layout --------- */
+.page-hero{
+  padding:4rem 0 3rem;margin-bottom:3rem;
+  background:linear-gradient(135deg, rgba(0,39,79,.03), rgba(91,46,138,.02));
+  border-bottom:1px solid rgba(0,39,79,.1);
+}
+@media (max-width:768px){
+  .page-hero{padding:2.5rem 0 2rem}
+}
+.page-hero h1.hero-title-animated{
+  font-size:3.25rem;
+  color:var(--navy);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.15;
+  margin-bottom:1.5rem;
+}
+@media (max-width:768px){
+  .page-hero h1.hero-title-animated{font-size:2.25rem}
+}
+@keyframes gradient-shift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.page-hero h1.hero-title-animated{
+  animation:gradient-shift 3s ease infinite;
+}
+
+/* Swosh in animations */
+@keyframes swosh-in-left{
+  0%{opacity:0;transform:translateX(-60px) scale(0.95)}
+  100%{opacity:1;transform:translateX(0) scale(1)}
+}
+@keyframes swosh-in-right{
+  0%{opacity:0;transform:translateX(60px) scale(0.95)}
+  100%{opacity:1;transform:translateX(0) scale(1)}
+}
+.swosh-first{
+  animation:swosh-in-left 0.8s ease-out forwards;
+  animation-delay:0.2s;
+  opacity:0;
+}
+.swosh-second{
+  animation:swosh-in-right 0.8s ease-out forwards;
+  animation-delay:0.6s;
+  opacity:0;
+}
+.split{display:grid;gap:2rem;margin:3rem auto;max-width:1100px}
+@media (min-width:768px){.split{grid-template-columns:1fr 1fr;gap:2.5rem}}
+.split article{
+  background:#fff;
+  padding:2.5rem;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:transform .3s ease, box-shadow .3s ease;
+  border-top:3px solid var(--gold);
+}
+.split article:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,39,79,.12)}
+.grid-2{display:grid;gap:2rem;margin:2rem 0}
+@media (min-width:768px){.grid-2{grid-template-columns:1fr 1fr;gap:2.5rem}}
+.card-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;margin:2rem 0}
+@media (min-width:768px){.card-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:900px){.card-grid{grid-template-columns:repeat(3,1fr)}}
+.card{
+  background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);
+  transition:transform .3s ease, box-shadow .3s ease;
+  border:1px solid rgba(0,39,79,.08);
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,39,79,.15)}
+.check-list{padding-left:1.5rem;list-style:none}
+.check-list li{margin:.75rem 0;position:relative;line-height:1.7}
+.check-list li::before{content:'✓';position:absolute;left:-1.5rem;color:var(--gold);font-weight:700;font-size:1.1rem}
+
+/* --------- Forms --------- */
+.form{display:grid;gap:1rem;max-width:760px;margin:0 auto}
+fieldset{border:2px solid rgba(0,39,79,.1);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+legend{padding:0 .5rem;font-weight:700;color:var(--navy);font-size:1.1rem}
+label{font-weight:600;display:block;margin-bottom:.5rem;color:var(--text)}
+input[type="text"],input[type="email"],input[type="tel"],input[type="date"],
+input[type="number"],input[type="file"],input[type="url"],select,textarea{
+  width:100%;padding:.85rem 1rem;border:2px solid #d1d5db;border-radius:var(--radius-sm);background:#fff;font:inherit;
+  transition:border-color .3s ease, box-shadow .3s ease;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,161,75,.1);
+}
+textarea{resize:vertical;min-height:120px}
+.checkbox,.radio{display:flex;gap:.75rem;align-items:flex-start;margin:.5rem 0}
+.amounts{display:flex;gap:.75rem;flex-wrap:wrap}
+.form-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-top:2rem}
+.btn:focus,.site-nav a:focus{
+  outline:3px solid rgba(201,161,75,.5);outline-offset:2px;
+}
+
+/* Progress / status */
+[aria-live]{min-height:1px}
+
+/* --------- People / Logos --------- */
+.people .person img{
+  width:100%;height:auto;border-radius:var(--radius);margin-bottom:.5rem;
+}
+.logo-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;align-items:center;
+}
+@media (min-width:768px){.logo-grid{grid-template-columns:repeat(4,1fr)}}
+.logo-grid img{
+  background:#fff;border-radius:8px;padding:.75rem;box-shadow:var(--shadow-sm);
+}
+
+/* --------- Gallery --------- */
+.gallery{margin:2rem 0}
+.gallery-grid{display:grid;gap:1rem}
+@media (min-width:768px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+.gallery figure{position:relative;overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow);margin:0;cursor:pointer;border:2px solid transparent;transition:border .3s ease}
+.gallery figure:hover{border-color:var(--sky)}
+.gallery img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .6s ease, filter .3s ease}
+.gallery figure:hover img{transform:scale(1.08);filter:brightness(1.1)}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,39,79,.7));color:#fff;padding:.5rem .75rem;font-weight:600;transform:translateY(100%);transition:transform .3s ease}
+.gallery figure:hover figcaption{transform:translateY(0)}
+
+/* About Founder Section */
+.about-founder{background:#fff;padding:4rem 0;margin:4rem 0;border-top:1px solid rgba(0,39,79,.1);border-bottom:1px solid rgba(0,39,79,.1)}
+.about-founder h2{text-align:center;margin-bottom:3rem;color:var(--navy)}
+.founder-layout{display:grid;gap:3rem;align-items:start}
+@media (min-width:768px){.founder-layout{grid-template-columns:320px 1fr;gap:4rem}}
+.founder-image{text-align:center}
+.founder-image img{width:100%;max-width:320px;height:auto;border-radius:var(--radius);box-shadow:var(--shadow);border:4px solid var(--gold);object-fit:cover}
+.founder-bio h3{margin-top:0;color:var(--navy);font-size:1.75rem}
+.founder-bio p{margin:1.25rem 0;line-height:1.8}
+@media (max-width:767px){
+  .about-founder{padding:3rem 0}
+  .founder-image img{max-width:240px;margin:0 auto}
+  .founder-layout{gap:2rem}
+}
+
+/* Upload Gallery */
+.upload-gallery{margin:2rem 0;padding:1.5rem;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+.upload-zone{border:2px dashed var(--sky);border-radius:var(--radius);padding:2rem;text-align:center;background:rgba(102,199,244,.05);transition:background .25s ease, border-color .25s ease, transform .25s ease;cursor:pointer}
+.upload-zone:hover{background:rgba(102,199,244,.12);border-color:var(--navy)}
+.upload-zone.drag-over{background:rgba(102,199,244,.2);border-color:var(--purple);transform:scale(1.02)}
+.upload-zone input[type="file"]{display:none}
+
+/* Gallery item animations */
+.gallery-item-new{opacity:0;transform:scale(0.8);transition:opacity .4s ease, transform .4s ease}
+.gallery-item-new.visible{opacity:1;transform:scale(1)}
+
+/* Remove button */
+.remove-photo{position:absolute;top:.5rem;right:.5rem;background:rgba(0,0,0,.7);color:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:20px;line-height:1;cursor:pointer;opacity:0;transition:opacity .25s ease, background .25s ease;z-index:10}
+.gallery figure:hover .remove-photo{opacity:1}
+.remove-photo:hover{background:rgba(220,38,38,.9)}
+
+/* Upload notification */
+.upload-notification{padding:.75rem 1rem;border-radius:var(--radius-sm);margin-bottom:1rem;font-weight:600;opacity:0;transform:translateY(-10px);transition:opacity .3s ease, transform .3s ease}
+.upload-notification.show{opacity:1;transform:translateY(0)}
+.upload-notification.success{background:#d1fae5;color:#065f46;border-left:4px solid #10b981}
+.upload-notification.error{background:#fee2e2;color:#991b1b;border-left:4px solid #ef4444}
+.upload-notification.info{background:#dbeafe;color:#1e40af;border-left:4px solid #3b82f6}
+
+/* --------- Footer --------- */
+.site-footer{
+  margin-top:4rem;padding:3rem 0 2rem;
+  background:var(--navy);
+  border-top:4px solid var(--gold);
+  color:#fff;
+}
+.site-footer strong{color:var(--gold);font-size:1.1rem}
+.site-footer .muted{color:rgba(255,255,255,.7);line-height:1.6}
+.site-footer a{color:rgba(255,255,255,.9);transition:color .3s ease;text-decoration:none}
+.site-footer a:hover{color:var(--gold)}
+.footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2rem}
+.footer-links{list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex-wrap:wrap}
+@media (max-width:768px){
+  .footer-grid{flex-direction:column;gap:1.5rem}
+  .footer-links{flex-direction:column;gap:.75rem}
+}
+
+/* --------- About & Mission Page --------- */
+/* Mission Intro Section */
+.mission-intro{margin:3rem 0}
+.mission-intro .card{max-width:900px;margin:0 auto}
+
+/* Mission Sections */
+.mission-sections{margin:4rem 0}
+.mission-card{position:relative}
+.mission-card .mission-icon{font-size:3.5rem;margin-bottom:1rem;display:block}
+.mission-card h2{color:var(--navy);margin-top:0;margin-bottom:1rem}
+.mission-card h3{color:var(--gold);font-size:1.1rem;margin-top:1.5rem;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.mission-card h4{color:var(--navy);font-size:1.05rem;margin-top:1.5rem;margin-bottom:1rem;font-weight:600}
+.mission-statement{font-style:italic;color:var(--text);padding:1.25rem;background:linear-gradient(135deg,rgba(201,161,75,.08),rgba(0,39,79,.05));border-left:4px solid var(--gold);margin:1rem 0;line-height:1.9;font-size:1.05rem}
+
+/* Vision & Values Section */
+.vision-values{margin:5rem 0}
+.vision-card{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.9));color:#fff;padding:3rem 2rem;border-radius:var(--radius);text-align:center;margin-bottom:4rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.vision-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop');background-size:cover;background-position:center;opacity:.15;z-index:0}
+.vision-card > *{position:relative;z-index:1}
+.vision-icon{font-size:4rem;margin-bottom:1.5rem}
+.vision-card h2{color:#fff;margin-bottom:1.5rem}
+.vision-text{font-size:1.35rem;line-height:1.8;max-width:800px;margin:0 auto;font-weight:400}
+
+/* Values Section */
+.values-section{margin:4rem 0}
+.values-section > h2{text-align:center;margin-bottom:3rem;color:var(--navy);font-size:2.25rem}
+.values-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media (min-width:640px){.values-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:900px){.values-grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1100px){.values-grid{grid-template-columns:repeat(5,1fr)}}
+
+.value-card{background:#fff;padding:2rem 1.5rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:transform .3s ease,box-shadow .3s ease;border-top:3px solid var(--gold);position:relative}
+.value-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(201,161,75,.2)}
+.value-icon{font-size:2.5rem;margin-bottom:1rem;color:var(--gold)}
+.value-card h3{color:var(--navy);font-size:1.25rem;margin:1rem 0 .75rem;font-weight:700}
+.value-card p{color:var(--text);font-size:.95rem;line-height:1.6;margin:0}
+
+/* Enhanced mission sections with background images */
+.mission-sections{position:relative;padding:4rem 0;background:linear-gradient(180deg,rgba(250,249,247,0),rgba(0,39,79,.02),rgba(250,249,247,0))}
+
+/* CTA Section on About page */
+.cta-section{background:linear-gradient(135deg,rgba(91,46,138,.05),rgba(0,39,79,.03));padding:4rem 2rem;border-radius:var(--radius);margin:4rem 0}
+.cta-section h2{margin-top:0}
+
+/* --------- Donation Page --------- */
+/* Impact Section */
+.donation-impact{margin:3rem 0;padding:2rem 0}
+.impact-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media (min-width:768px){.impact-grid{grid-template-columns:repeat(3,1fr)}}
+.impact-item{text-align:center;padding:2rem;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .3s ease}
+.impact-item:hover{transform:translateY(-6px)}
+.impact-icon{font-size:3rem;margin-bottom:1rem}
+.impact-item h3{color:var(--gold);font-size:1.75rem;margin:.5rem 0}
+.impact-item p{color:var(--text);font-size:.95rem;margin:0}
+
+/* Donation Form Section - Two Column Layout */
+.donation-form-section{display:grid;grid-template-columns:1fr;gap:2rem;margin:3rem 0}
+@media (min-width:992px){.donation-form-section{grid-template-columns:1fr 380px}}
+
+.donation-form{background:#fff;padding:2.5rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* Form Steps */
+.form-step{display:none}
+.form-step.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Amount Selection Cards */
+.amount-selection{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:2rem 0}
+.amount-card{background:#fff;border:3px solid #e5e7eb;border-radius:var(--radius);padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all .3s ease;position:relative}
+.amount-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 8px 20px rgba(201,161,75,.15)}
+.amount-card.selected{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,161,75,.08),rgba(0,39,79,.03));box-shadow:0 8px 20px rgba(201,161,75,.2)}
+.amount-card.featured{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,161,75,.05),transparent)}
+.amount-value{font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.amount-label{font-size:.9rem;color:var(--muted);font-weight:600}
+.popular-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:.25rem .75rem;border-radius:999px;font-size:.75rem;font-weight:700;white-space:nowrap}
+
+/* Custom Amount */
+.custom-amount-section{margin:2rem 0}
+.custom-amount-section label{display:block;margin-bottom:.75rem;font-weight:600;color:var(--navy)}
+.custom-amount-section input{width:100%;font-size:1.25rem;text-align:center}
+
+/* Donation Designation */
+.donation-designation{margin:2.5rem 0}
+.donation-designation h3{color:var(--navy);font-size:1.3rem;margin-bottom:1.5rem;text-align:center;font-weight:700}
+.designation-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media (min-width:640px){.designation-grid{grid-template-columns:repeat(3,1fr)}}
+.designation-card{border:3px solid #e5e7eb;border-radius:var(--radius);padding:1.5rem 1rem;cursor:pointer;transition:all .3s ease;display:block;text-align:center}
+.designation-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 12px rgba(201,161,75,.15)}
+.designation-card input[type="radio"]{display:none}
+.designation-card:has(input:checked){border-color:var(--gold);background:linear-gradient(135deg,rgba(201,161,75,.08),rgba(0,39,79,.03));box-shadow:0 4px 12px rgba(201,161,75,.2)}
+.designation-content{display:block}
+.designation-icon{font-size:2.5rem;display:block;margin-bottom:.75rem}
+.designation-content strong{display:block;font-size:1.1rem;margin-bottom:.5rem;color:var(--navy);font-weight:700}
+.designation-content small{color:var(--muted);font-size:.85rem;line-height:1.4;display:block}
+
+/* Donation Type Radio Cards */
+.donation-type{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0}
+.radio-card{border:2px solid #e5e7eb;border-radius:var(--radius);padding:1.25rem;cursor:pointer;transition:all .3s ease;display:block}
+.radio-card:hover{border-color:var(--gold)}
+.radio-card input[type="radio"]{display:none}
+.radio-card input[type="radio"]:checked + .radio-content{color:var(--navy)}
+.radio-card:has(input:checked){border-color:var(--gold);background:rgba(201,161,75,.05)}
+.radio-content{display:block;text-align:center}
+.radio-content strong{display:block;font-size:1.1rem;margin-bottom:.25rem;color:var(--navy)}
+.radio-content small{color:var(--muted);font-size:.85rem}
+
+/* Form Grid */
+.form-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media (min-width:640px){.form-grid{grid-template-columns:1fr 1fr}}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;margin-bottom:.5rem;font-weight:600;color:var(--navy)}
+
+/* Button Group */
+.button-group{display:flex;gap:1rem;margin-top:2rem}
+.button-group .btn{flex:1}
+
+/* Donation Summary Sidebar */
+.donation-summary{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow);height:fit-content;position:sticky;top:100px}
+.donation-summary h3{margin-top:0;color:var(--navy);font-size:1.5rem}
+.summary-item{display:flex;justify-content:space-between;padding:.75rem 0;font-size:1rem}
+.summary-item span{color:var(--muted)}
+.summary-item strong{color:var(--navy);font-size:1.1rem}
+.summary-divider{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:1rem 0}
+.summary-item.total{font-size:1.25rem;padding-top:1rem}
+.summary-item.total strong{color:var(--gold);font-size:1.75rem}
+.secure-badge{display:flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:1rem;background:rgba(0,39,79,.05);border-radius:var(--radius-sm);color:var(--muted);font-size:.85rem;justify-content:center}
+
+/* Loading Spinner */
+.loading-spinner{text-align:center;padding:4rem 2rem}
+.spinner{width:60px;height:60px;border:4px solid rgba(201,161,75,.2);border-top-color:var(--gold);border-radius:50%;margin:0 auto 1.5rem;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-spinner p{color:var(--muted);font-size:1.1rem}
+
+/* Success Message */
+.success-message{text-align:center;padding:3rem 2rem}
+.success-icon{width:80px;height:80px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 1.5rem;font-weight:700}
+.success-message h2{color:var(--navy);margin-bottom:1rem}
+.success-message p{font-size:1.1rem;color:var(--text);margin:.75rem 0}
+
+/* Trust Section */
+.trust-section{margin:3rem 0;padding:2rem;text-align:center}
+
+/* Error Message */
+.error-message{text-align:center;padding:3rem 2rem}
+.error-icon{width:80px;height:80px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 1.5rem;font-weight:700}
+.error-message h2{color:var(--navy);margin-bottom:1rem}
+.error-message p{font-size:1.1rem;color:var(--text);margin:.75rem 0}
+.error-details{background:rgba(239,68,68,.1);padding:1rem;border-radius:var(--radius-sm);color:#991b1b;font-weight:600;margin:1rem 0}
+.success-details{background:rgba(0,39,79,.05);padding:1.5rem;border-radius:var(--radius);margin:2rem auto;max-width:500px;text-align:left}
+.success-details p{margin:.5rem 0;font-size:1rem}
+
+/* Mobile Responsive Adjustments for Donation */
+@media (max-width:768px){
+  .donation-summary{position:static;margin-top:2rem}
+  .amount-selection{grid-template-columns:repeat(2,1fr)}
+  .donation-type{grid-template-columns:1fr}
+}
+
+/* --------- Scholarship Page --------- */
+/* Scholarship Introduction */
+.scholarship-intro{margin:3rem 0}
+.scholarship-intro .card{max-width:900px;margin:0 auto}
+
+/* Mission Highlight */
+.mission-highlight{margin:4rem 0}
+.mission-card-large{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.95));color:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow-lg);text-align:center}
+.mission-card-large h2{color:var(--gold);margin-top:0;font-size:2rem}
+.mission-card-large .mission-statement{font-size:1.25rem;font-style:italic;line-height:1.8;margin:1.5rem 0;color:#fff;font-weight:500}
+.mission-card-large p:last-child{opacity:.95;margin-bottom:0}
+
+/* Support Grid */
+.support-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:3rem 0}
+@media (min-width:768px){.support-grid{grid-template-columns:repeat(3,1fr)}}
+.support-card{background:#fff;padding:2.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:transform .3s ease,box-shadow .3s ease;border-top:4px solid var(--gold)}
+.support-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(201,161,75,.2)}
+.support-icon{font-size:3.5rem;margin-bottom:1rem}
+.support-card h3{color:var(--navy);font-size:1.3rem;margin:1rem 0 .75rem;font-weight:700}
+.support-card p{color:var(--text);line-height:1.7;margin:0}
+
+/* What We Offer Section */
+.what-we-offer{margin:4rem 0;padding:3rem 2rem;background:linear-gradient(135deg,rgba(91,46,138,.03),rgba(0,39,79,.02));border-radius:var(--radius)}
+.offer-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2rem}
+@media (min-width:640px){.offer-grid{grid-template-columns:1fr 1fr}}
+.offer-item{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:all .3s ease}
+.offer-item:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+.offer-icon{font-size:2.5rem;margin-bottom:1rem}
+.offer-item h3{color:var(--navy);font-size:1.15rem;margin:.5rem 0 .75rem;font-weight:700}
+.offer-item p{color:var(--text);font-size:.95rem;line-height:1.6;margin:0}
+
+/* Application Process */
+.application-process{margin:4rem 0}
+.process-steps{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2rem}
+@media (min-width:768px){.process-steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.process-steps{grid-template-columns:repeat(4,1fr)}}
+.process-step{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;position:relative;transition:all .3s ease}
+.process-step:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,39,79,.15)}
+.step-number{width:60px;height:60px;background:linear-gradient(135deg,var(--gold),#b8894a);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.75rem;font-weight:700;margin:0 auto 1.5rem;box-shadow:0 4px 12px rgba(201,161,75,.3)}
+.process-step h3{color:var(--navy);font-size:1.2rem;margin:.5rem 0 1rem;font-weight:700}
+.process-step p{color:var(--text);font-size:.95rem;line-height:1.6;margin:0}
+
+/* Impact Section */
+.impact-section{margin:4rem 0}
+.impact-card{background:linear-gradient(135deg,rgba(201,161,75,.08),rgba(0,39,79,.03));padding:3rem;border-radius:var(--radius);border-left:6px solid var(--gold)}
+.impact-card h2{color:var(--navy);margin-top:0;font-size:2rem}
+.impact-card p{font-size:1.1rem;line-height:1.8;color:var(--text)}
+.impact-quote{font-size:1.5rem;font-style:italic;color:var(--gold);font-weight:600;text-align:center;margin:2rem 0 0;padding:2rem;background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm)}
+
+/* Scholarship CTA */
+.scholarship-cta{text-align:center;margin:4rem 0}
+.scholarship-cta h2{font-size:2.25rem;margin-bottom:1rem}
+
+/* Timeline Section */
+.timeline-section{margin:4rem 0}
+.timeline{position:relative;padding:2rem 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--navy));transform:translateX(-50%)}
+@media (max-width:768px){.timeline::before{left:30px}}
+.timeline-item{position:relative;margin:2rem 0;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media (max-width:768px){.timeline-item{grid-template-columns:60px 1fr;gap:1rem}}
+.timeline-item:nth-child(odd) .timeline-content{text-align:right;grid-column:1}
+.timeline-item:nth-child(even) .timeline-content{grid-column:2}
+@media (max-width:768px){
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content{text-align:left;grid-column:2}
+}
+.timeline-marker{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:24px;height:24px;background:var(--gold);border:4px solid #fff;border-radius:50%;box-shadow:0 0 0 4px rgba(201,161,75,.2);z-index:2}
+@media (max-width:768px){.timeline-marker{left:30px}}
+.timeline-content{background:#fff;padding:1.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:all .3s ease}
+.timeline-content:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+.timeline-content h3{color:var(--navy);font-size:1.2rem;margin:0 0 .5rem;font-weight:700}
+.timeline-content p{color:var(--muted);font-size:1rem;margin:0}
+
+/* Section Title */
+.section-title{text-align:center;color:var(--navy);font-size:2rem;margin:3rem 0 2rem;font-weight:700;position:relative;padding-bottom:1rem}
+.section-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+/* --------- Charity Page --------- */
+/* Charity Introduction */
+.charity-intro{margin:3rem 0}
+.charity-intro .card{max-width:900px;margin:0 auto}
+
+/* Work Grid */
+.work-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:3rem 0}
+@media (min-width:640px){.work-grid{grid-template-columns:1fr 1fr}}
+.work-card{background:#fff;padding:2.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow);transition:all .3s ease;border-left:4px solid var(--gold)}
+.work-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(201,161,75,.2)}
+.work-icon{font-size:3rem;margin-bottom:1rem}
+.work-card h3{color:var(--navy);font-size:1.3rem;margin:.5rem 0 1rem;font-weight:700}
+.work-card p{color:var(--text);line-height:1.7;margin:0}
+
+/* Impact Stats */
+.impact-stats{margin:4rem 0;padding:3rem 2rem;background:linear-gradient(135deg,rgba(0,39,79,.05),rgba(91,46,138,.03));border-radius:var(--radius)}
+.stats-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:2rem 0 3rem}
+@media (min-width:640px){.stats-grid{grid-template-columns:repeat(3,1fr)}}
+.stat-card{background:#fff;padding:2.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:transform .3s ease}
+.stat-card:hover{transform:translateY(-8px)}
+.stat-number{font-size:3.5rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.5rem;font-family:'Merriweather',serif}
+.stat-label{color:var(--navy);font-size:1.1rem;font-weight:600;line-height:1.4}
+.impact-narrative{max-width:900px;margin:0 auto;text-align:center}
+.impact-narrative p{font-size:1.1rem;line-height:1.8;color:var(--text);margin:1rem 0}
+
+/* Get Involved */
+.get-involved{margin:4rem 0}
+.involvement-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:3rem 0}
+@media (min-width:768px){.involvement-grid{grid-template-columns:repeat(3,1fr)}}
+.involvement-card{background:#fff;padding:2.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:all .3s ease;border-top:3px solid var(--gold)}
+.involvement-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(201,161,75,.2)}
+.involvement-card.featured{background:linear-gradient(135deg,rgba(201,161,75,.08),rgba(0,39,79,.03));border-top-width:5px;box-shadow:0 8px 24px rgba(201,161,75,.15)}
+.involvement-card.featured:hover{box-shadow:0 20px 50px rgba(201,161,75,.3)}
+.involvement-icon{font-size:3.5rem;margin-bottom:1rem}
+.involvement-card h3{color:var(--navy);font-size:1.4rem;margin:.5rem 0 1rem;font-weight:700}
+.involvement-card p{color:var(--text);line-height:1.7;margin:0 0 1.5rem}
+.involvement-card .btn{margin-top:1rem}
+
+/* Charity Closing */
+.charity-closing{margin:4rem 0}
+.closing-card{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.95));color:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow-lg);text-align:center;max-width:900px;margin:0 auto}
+.closing-card h2{color:var(--gold);font-size:2rem;margin-top:0;margin-bottom:1.5rem}
+.closing-card p{font-size:1.15rem;line-height:1.8;margin:1rem 0;opacity:.95}
+.closing-quote{font-style:italic;font-size:1.25rem;color:#fff;font-weight:500;margin-top:2rem;padding-top:2rem;border-top:2px solid rgba(201,161,75,.3)}
+
+/* --------- Application Form Page --------- */
+/* Application Notice */
+.application-notice{margin:2rem 0 3rem}
+.notice-card{background:linear-gradient(135deg,rgba(201,161,75,.1),rgba(0,39,79,.05));border-left:5px solid var(--gold);padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.notice-card h3{color:var(--navy);margin-top:0;margin-bottom:1rem;font-size:1.3rem}
+.notice-card ul{margin:0;padding-left:1.5rem}
+.notice-card li{margin:.75rem 0;line-height:1.6;color:var(--text)}
+
+/* Application Form */
+.application-form{max-width:1000px;margin:0 auto}
+.form-section{background:#fff;padding:2.5rem;margin-bottom:2rem;border-radius:var(--radius);box-shadow:var(--shadow);border-top:4px solid var(--gold)}
+.form-section legend{font-size:1.5rem;font-weight:700;color:var(--navy);padding:0 1rem 0 0;margin-bottom:2rem}
+
+/* Form Grid Layouts */
+.form-grid-2{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media (min-width:768px){.form-grid-2{grid-template-columns:1fr 1fr}}
+.form-group{margin-bottom:1.5rem}
+.form-group:last-child{margin-bottom:0}
+.form-group label{display:block;font-weight:600;color:var(--navy);margin-bottom:.5rem;font-size:.95rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.75rem 1rem;border:2px solid #e5e7eb;border-radius:var(--radius-sm);font-family:inherit;font-size:1rem;transition:border-color .3s ease}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold)}
+.form-group textarea{resize:vertical}
+.form-hint{display:block;margin-top:.5rem;font-size:.85rem;color:var(--muted);font-style:italic}
+
+/* Sponsor Options */
+.sponsor-options{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+@media (min-width:640px){.sponsor-options{grid-template-columns:repeat(2,1fr)}}
+.radio-option{display:flex;align-items:center;padding:1rem;border:2px solid #e5e7eb;border-radius:var(--radius-sm);cursor:pointer;transition:all .3s ease}
+.radio-option:hover{border-color:var(--gold);background:rgba(201,161,75,.05)}
+.radio-option input[type="radio"]{margin-right:.75rem;width:18px;height:18px;cursor:pointer}
+.radio-option:has(input:checked){border-color:var(--gold);background:rgba(201,161,75,.1);font-weight:600}
+.radio-option span{color:var(--navy)}
+
+/* Referee Section */
+.referee-section{background:rgba(0,39,79,.03);padding:1.5rem;border-radius:var(--radius-sm);margin-bottom:2rem}
+.referee-section:last-child{margin-bottom:0}
+.referee-section h4{color:var(--navy);margin-top:0;margin-bottom:1.5rem;font-size:1.1rem;font-weight:600}
+
+/* Upload Grid */
+.upload-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1.5rem}
+@media (min-width:640px){.upload-grid{grid-template-columns:1fr 1fr}}
+.upload-item{background:rgba(0,39,79,.02);padding:1.5rem;border-radius:var(--radius);border:2px dashed #d1d5db;transition:all .3s ease}
+.upload-item:hover{border-color:var(--gold);background:rgba(201,161,75,.05)}
+.upload-item label{display:block;cursor:pointer;text-align:center}
+.upload-icon{font-size:2.5rem;display:block;margin-bottom:.75rem}
+.upload-item strong{display:block;color:var(--navy);font-size:1rem;margin-bottom:.25rem}
+.upload-item small{display:block;color:var(--muted);font-size:.85rem;margin-bottom:1rem}
+.upload-item input[type="file"]{width:100%;padding:.5rem;font-size:.9rem;border:1px solid #e5e7eb;border-radius:var(--radius-sm);cursor:pointer}
+.file-name{display:block;margin-top:.75rem;font-size:.9rem;color:var(--muted);text-align:center;font-style:italic}
+.file-name.file-selected{color:var(--gold);font-weight:600;font-style:normal}
+
+/* Declaration Box */
+.declaration-box{background:rgba(0,39,79,.03);padding:2rem;border-radius:var(--radius);border-left:4px solid var(--gold)}
+.checkbox-large{display:flex;align-items:flex-start;margin-bottom:1.5rem;cursor:pointer}
+.checkbox-large:last-child{margin-bottom:0}
+.checkbox-large input[type="checkbox"]{margin-right:1rem;margin-top:.25rem;width:20px;height:20px;cursor:pointer;flex-shrink:0}
+.checkbox-large span{line-height:1.6;color:var(--text);font-size:.95rem}
+
+/* Form Actions */
+.form-actions{text-align:center;margin-top:3rem;padding:2rem;background:rgba(0,39,79,.02);border-radius:var(--radius)}
+.btn-large{font-size:1.2rem;padding:1rem 3rem;min-width:250px}
+.form-footer-note{margin-top:1.5rem;color:var(--muted);font-size:.95rem;line-height:1.6;max-width:600px;margin-left:auto;margin-right:auto}
+
+/* Spinner for loading state */
+.spinner-small{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* --------- Benefactors Page --------- */
+/* Benefactors Introduction */
+.benefactors-intro{margin:3rem 0}
+.benefactors-intro .card{max-width:900px;margin:0 auto}
+
+/* Legacy Section */
+.legacy-section{margin:4rem 0}
+.legacy-card{background:linear-gradient(135deg,rgba(0,39,79,.05),rgba(91,46,138,.03));padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow);border-left:6px solid var(--gold);max-width:900px;margin:0 auto}
+.legacy-card h2{color:var(--navy);margin-top:0;font-size:2rem;margin-bottom:1.5rem}
+.legacy-card p{font-size:1.1rem;line-height:1.8;color:var(--text);margin:1rem 0}
+.mission-quote{font-size:1.3rem;font-style:italic;color:var(--gold);font-weight:600;text-align:center;margin:2rem 0 0;padding:2rem;background:#fff;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);border-left:4px solid var(--gold)}
+
+/* Impact Benefits Grid */
+.impact-benefits-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:2rem 0}
+@media (min-width:640px){.impact-benefits-grid{grid-template-columns:1fr 1fr}}
+.benefit-card{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:all .3s ease;border-top:3px solid var(--gold)}
+.benefit-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(201,161,75,.2)}
+.benefit-icon{font-size:3rem;margin-bottom:1rem}
+.benefit-card h3{color:var(--navy);font-size:1.2rem;margin:.5rem 0 1rem;font-weight:700}
+.benefit-card p{color:var(--text);line-height:1.6;margin:0}
+.impact-message{max-width:800px;margin:3rem auto 0;text-align:center;padding:2rem;background:rgba(201,161,75,.08);border-radius:var(--radius);border:2px solid rgba(201,161,75,.2)}
+.impact-message p{font-size:1.15rem;line-height:1.8;color:var(--navy);font-weight:500;margin:0}
+
+/* Join Circle Section */
+.join-circle-section{margin:4rem 0}
+.join-circle-card{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.95));color:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow-lg);text-align:center;max-width:900px;margin:0 auto}
+.join-circle-card h2{color:var(--gold);font-size:2rem;margin-top:0;margin-bottom:1rem}
+.join-circle-card .lead{color:#fff;opacity:.95;font-size:1.25rem;margin-bottom:1.5rem}
+.join-circle-card p{font-size:1.05rem;line-height:1.8;margin:1rem 0;opacity:.95}
+.join-circle-card .cta-row{margin-top:2rem}
+
+/* Gratitude Section */
+.gratitude-section{margin:4rem 0}
+.gratitude-card{background:rgba(201,161,75,.05);padding:3rem;border-radius:var(--radius);border:3px solid var(--gold);text-align:center;max-width:800px;margin:0 auto}
+.gratitude-card h2{color:var(--navy);font-size:2rem;margin-top:0;margin-bottom:1.5rem}
+.gratitude-card p{font-size:1.1rem;line-height:1.8;color:var(--text);margin:1rem 0}
+.gratitude-quote{font-style:italic;font-weight:600;color:var(--gold);font-size:1.2rem;margin-top:2rem}
+
+/* Beneficiaries Documents Section */
+.beneficiaries-documents{margin:4rem 0}
+.pdf-viewer-container{display:grid;grid-template-columns:1fr;gap:3rem;margin-top:2rem}
+.pdf-viewer{background:#fff;padding:2rem;border-radius:var(--radius);box-shadow:var(--shadow);border-top:4px solid var(--gold)}
+.pdf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.pdf-header h3{color:var(--navy);margin:0;font-size:1.3rem;font-weight:700}
+.pdf-embed{background:rgba(0,39,79,.02);padding:1rem;border-radius:var(--radius);overflow:hidden;position:relative}
+.pdf-embed iframe{display:block;width:100%;min-height:800px;background:#fff;user-select:none}
+.btn-small{font-size:.9rem;padding:.5rem 1rem}
+@media (max-width:768px){
+  .pdf-embed iframe{min-height:500px}
+  .pdf-header{flex-direction:column;align-items:flex-start}
+}
+
+/* --------- Board of Trustees Page --------- */
+/* Board Introduction */
+.board-intro{margin:3rem 0}
+.board-intro .card{max-width:900px;margin:0 auto}
+
+/* Board Role Section */
+.board-role-section{margin:4rem 0}
+.role-card{background:linear-gradient(135deg,rgba(0,39,79,.05),rgba(91,46,138,.03));padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow);border-left:6px solid var(--gold);max-width:900px;margin:0 auto}
+.role-card h2{color:var(--navy);margin-top:0;font-size:2rem;margin-bottom:1.5rem}
+.role-card p{font-size:1.05rem;line-height:1.8;color:var(--text);margin:1rem 0}
+.role-list{list-style:none;padding:0;margin:2rem 0}
+.role-list li{font-size:1.05rem;line-height:1.8;color:var(--text);margin:1rem 0;padding-left:0}
+.role-conclusion{margin-top:2rem;font-weight:500;color:var(--navy);font-size:1.1rem}
+
+/* Board Leadership Section */
+.board-leadership-section{margin:4rem 0}
+.leadership-card{background:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow);border-top:4px solid var(--gold);max-width:900px;margin:0 auto}
+.leadership-card h2{color:var(--navy);margin-top:0;font-size:2rem;margin-bottom:1.5rem}
+.leadership-card p{font-size:1.05rem;line-height:1.8;color:var(--text);margin:1rem 0}
+.purpose-quote{font-size:1.3rem;font-style:italic;color:var(--gold);font-weight:600;text-align:center;margin:2rem 0;padding:2rem;background:rgba(201,161,75,.05);border-radius:var(--radius-sm);border-left:4px solid var(--gold)}
+
+/* Board Members Section */
+.board-members-section{margin:4rem 0}
+.board-members-grid{display:grid;grid-template-columns:1fr;gap:3rem;margin-top:2rem}
+@media (min-width:768px){.board-members-grid{grid-template-columns:1fr 1fr}}
+.board-member-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:all .3s ease;border-top:4px solid var(--gold)}
+.board-member-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(201,161,75,.2)}
+.member-photo{position:relative;width:100%;height:300px;overflow:hidden;background:rgba(0,39,79,.05)}
+.member-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.member-badge{position:absolute;top:1rem;right:1rem;background:var(--gold);color:#fff;padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.member-info{padding:2rem}
+.member-info h3{color:var(--navy);font-size:1.5rem;margin:0 0 .5rem;font-weight:700}
+.member-title{color:var(--gold);font-size:1.05rem;font-weight:600;margin:0 0 1.5rem}
+.member-bio{color:var(--text);font-size:.95rem;line-height:1.7;margin:0 0 1.5rem}
+.member-expertise{display:flex;flex-wrap:wrap;gap:.75rem}
+.expertise-tag{display:inline-block;background:rgba(0,39,79,.08);color:var(--navy);padding:.4rem .9rem;border-radius:20px;font-size:.85rem;font-weight:600;transition:all .3s ease}
+.expertise-tag:hover{background:var(--gold);color:#fff}
+
+/* Board Transparency Section */
+.board-transparency-section{margin:4rem 0}
+.transparency-card{background:rgba(201,161,75,.05);padding:3rem;border-radius:var(--radius);border:3px solid var(--gold);text-align:center;max-width:900px;margin:0 auto}
+.transparency-card h2{color:var(--navy);font-size:2rem;margin-top:0;margin-bottom:1.5rem}
+.transparency-card p{font-size:1.1rem;line-height:1.8;color:var(--text);margin:1rem 0}
+
+/* Board Legacy Section */
+.board-legacy-section{margin:4rem 0}
+.legacy-final-card{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.95));color:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow-lg);text-align:center;max-width:900px;margin:0 auto}
+.legacy-final-card h2{color:var(--gold);font-size:2rem;margin-top:0;margin-bottom:1.5rem}
+.legacy-final-card p{font-size:1.1rem;line-height:1.8;margin:1rem 0;opacity:.95}
+.legacy-final-quote{font-style:italic;font-weight:600;font-size:1.2rem;margin-top:2rem;padding-top:2rem;border-top:2px solid rgba(201,161,75,.3)}
+
+/* --------- Join/Charity Initiative Page --------- */
+/* Join Introduction */
+.join-intro{margin:3rem 0}
+.join-intro .card{max-width:900px;margin:0 auto}
+
+/* Join Pathways */
+.join-pathways{margin:4rem 0}
+.pathway-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2rem}
+@media (min-width:640px){.pathway-grid{grid-template-columns:repeat(3,1fr)}}
+.pathway-card{background:#fff;padding:2.5rem 2rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:all .3s ease;border-top:4px solid var(--gold)}
+.pathway-card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(201,161,75,.2)}
+.pathway-icon{font-size:4rem;margin-bottom:1rem}
+.pathway-card h3{color:var(--navy);font-size:1.4rem;margin:.5rem 0 1rem;font-weight:700}
+.pathway-card p{color:var(--text);line-height:1.7;margin:0 0 1.5rem}
+.pathway-btn{margin-top:1rem;width:100%}
+
+/* Join Form */
+.join-form{max-width:1000px;margin:4rem auto;padding:3rem;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border-top:4px solid var(--gold)}
+.form-title{color:var(--navy);font-size:2rem;margin:0 0 2rem;text-align:center;font-weight:700}
+.checkbox-group{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+.checkbox-group .checkbox{margin:0}
+
+/* Join Together Section */
+.join-together{margin:4rem 0}
+.together-card{background:linear-gradient(135deg,var(--navy),rgba(0,39,79,.95));color:#fff;padding:3rem;border-radius:var(--radius);box-shadow:var(--shadow-lg);text-align:center;max-width:900px;margin:0 auto}
+.together-card h2{color:var(--gold);font-size:2rem;margin-top:0;margin-bottom:1.5rem}
+.together-card p{font-size:1.1rem;line-height:1.8;margin:1rem 0;opacity:.95}
+.together-quote{font-style:italic;font-weight:600;font-size:1.2rem;margin-top:2rem;padding-top:2rem;border-top:2px solid rgba(201,161,75,.3)}
+
+/* Gold Button Variant */
+.btn-gold{background:var(--gold);color:#fff;border:2px solid var(--gold)}
+.btn-gold:hover{background:transparent;color:var(--gold);border-color:var(--gold)}
+
+/* --------- Utilities --------- */
+.center{text-align:center}
+.hide{display:none}
+.mt-0{margin-top:0}
+.mb-0{margin-bottom:0}
+.mb-1{margin-bottom:.5rem}
+.mb-2{margin-bottom:1rem}
+.w-full{width:100%}

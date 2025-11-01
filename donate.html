@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Donate | Chris Agara Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="bg-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">
+                <a href="index.html" class="logo" aria-label="Home">CAF</a>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About & Mission</a></li>
+                    <li><a href="scholarship.html">Scholarship</a></li>
+                    <li><a href="charity.html">Charity</a></li>
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board</a></li>
+                    <li><a class="btn btn-secondary" href="apply.html">Apply</a></li>
+                    <li><a class="btn btn-primary" href="donate.html" aria-current="page">Donate</a></li>
+                    <li><a class="btn btn-primary" href="join.html">Join</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+        <section class="page-hero">
+            <h1>Make a Donation</h1>
+            <p class="lead">Your generosity empowers students and transforms communities across Cross River State.</p>
+        </section>
+
+        <!-- Impact Statement -->
+        <section class="donation-impact">
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-icon">🎓</div>
+                    <h3>₦50,000</h3>
+                    <p>Sponsors one semester for a student</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">💼 </div>
+                    <h3>₦100,000</h3>
+                    <p> Empowers youth with entrepreneurship training</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">🍚 </div>
+                    <h3>₦250,000</h3>
+                    <p>Provides food aid to 10 vulnerable families</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Form -->
+        <section class="donation-form-section">
+            <form id="donationForm" class="donation-form">
+                <!-- Step 1: Select Amount -->
+                <div class="form-step active" id="step1">
+                    <h2>Select Donation Amount</h2>
+                    
+                    <div class="amount-selection">
+                        <div class="amount-card" data-amount="10000">
+                            <div class="amount-value">₦10,000</div>
+                            <div class="amount-label">Starter</div>
+                        </div>
+                        <div class="amount-card" data-amount="25000">
+                            <div class="amount-value">₦25,000</div>
+                            <div class="amount-label">Supporter</div>
+                        </div>
+                        <div class="amount-card" data-amount="50000">
+                            
+                            <div class="amount-value">₦50,000</div>
+                            <div class="amount-label">Champion</div>
+                        </div>
+                        <div class="amount-card" data-amount="100000">
+                            <div class="amount-value">₦100,000</div>
+                            <div class="amount-label">Patron</div>
+                        </div>
+                        <div class="amount-card" data-amount="250000">
+                            <div class="amount-value">₦250,000</div>
+                            <div class="amount-label">Alpha</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-amount-section">
+                        <label for="customAmount">Or enter a custom amount (₦)</label>
+                        <input type="number" id="customAmount" name="customAmount" placeholder="Enter amount" min="1000" step="100" />
+                    </div>
+
+                    <!-- Donation Designation -->
+                    <div class="donation-designation">
+                        <h3>Where should your donation go?</h3>
+                        <div class="designation-grid">
+                            <label class="designation-card">
+                                <input type="radio" name="designation" value="scholarship" />
+                                <span class="designation-content">
+                                    <span class="designation-icon">🎓</span>
+                                    <strong>Scholarship Fund</strong>
+                                    <small>Support students pursuing higher education</small>
+                                </span>
+                            </label>
+                            <label class="designation-card">
+                                <input type="radio" name="designation" value="charity" />
+                                <span class="designation-content">
+                                    <span class="designation-icon">❤️</span>
+                                    <strong>Charity Initiative</strong>
+                                    <small>Help vulnerable communities & families</small>
+                                </span>
+                            </label>
+                            <label class="designation-card">
+                                <input type="radio" name="designation" value="general" checked />
+                                <span class="designation-content">
+                                    <span class="designation-icon">🌟</span>
+                                    <strong>Where Needed Most</strong>
+                                    <small>Foundation decides based on urgent needs</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="donation-type">
+                        <label class="radio-card">
+                            <input type="radio" name="frequency" value="one-time" checked />
+                            <span class="radio-content">
+                                <strong>One-time</strong>
+                                <small>Make a single donation</small>
+                            </span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="frequency" value="monthly" />
+                            <span class="radio-content">
+                                <strong>Monthly</strong>
+                                <small>Recurring monthly support</small>
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="button" class="btn btn-primary w-full" id="continueBtn">Continue to Details</button>
+                </div>
+
+                <!-- Step 2: Donor Information -->
+                <div class="form-step" id="step2">
+                    <h2>Your Information</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="donorName">Full Name *</label>
+                            <input type="text" id="donorName" name="donorName" required placeholder="John Doe" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donorEmail">Email Address *</label>
+                            <input type="email" id="donorEmail" name="donorEmail" required placeholder="john@example.com" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donorPhone">Phone Number (Optional)</label>
+                            <input type="tel" id="donorPhone" name="donorPhone" placeholder="+234 xxx xxxx xxx" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donorLocation">Location (Optional)</label>
+                            <input type="text" id="donorLocation" name="donorLocation" placeholder="City, State" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dedication">Dedication Message (Optional)</label>
+                        <textarea id="dedication" name="dedication" rows="3" placeholder="In honor of..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="anonymous" name="anonymous" />
+                            <span>Make this donation anonymous</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="newsletter" name="newsletter" />
+                            <span>Send me updates about the foundation's impact</span>
+                        </label>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" id="backBtn">Back</button>
+                        <button type="button" class="btn btn-primary" id="payBtn">Proceed to Payment</button>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="form-step" id="loadingStep">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Processing your donation...</p>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Donation Summary Sidebar -->
+            <div class="donation-summary">
+                <h3>Donation Summary</h3>
+                <div class="summary-item">
+                    <span>Amount:</span>
+                    <strong id="summaryAmount">₦0</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Frequency:</span>
+                    <strong id="summaryFrequency">One-time</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Designation:</span>
+                    <strong id="summaryDesignation">Where Needed Most</strong>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-item total">
+                    <span>Total:</span>
+                    <strong id="summaryTotal">₦0</strong>
+                </div>
+                <div class="secure-badge">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                    </svg>
+                    Secured by Paystack
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section class="trust-section">
+            <p class="center muted">Your donation is secure and tax-deductible. We use industry-leading encryption to protect your information.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong>Chris Agara Foundation</strong>
+                <p class="muted">Building futures through education and community impact.</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    <li><a href="benefactors.html">Benefactors</a></li>
+                    <li><a href="board.html">Board of Trustees</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container tiny">© 2025 Chris Agara Foundation. All rights reserved.</div>
+    </footer>
+
+    <!-- Paystack Inline Script -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    
+    <script>
+    // ==========================================
+    // PAYSTACK CONFIGURATION
+    // ==========================================
+    // REPLACE WITH YOUR ACTUAL PAYSTACK PUBLIC KEY WHEN HOSTING
+    const PAYSTACK_PUBLIC_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxx'; // TODO: Replace with your live key: pk_live_xxxxx
+    
+    // ==========================================
+    // DONATION FORM STATE
+    // ==========================================
+    let donationData = {
+        amount: 0,
+        frequency: 'one-time',
+        name: '',
+        email: '',
+        phone: '',
+        location: '',
+        dedication: '',
+        anonymous: false,
+        newsletter: false
+    };
+
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
+    const amountCards = document.querySelectorAll('.amount-card');
+    const customAmountInput = document.getElementById('customAmount');
+    const continueBtn = document.getElementById('continueBtn');
+    const backBtn = document.getElementById('backBtn');
+    const payBtn = document.getElementById('payBtn');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const loadingStep = document.getElementById('loadingStep');
+    
+    // Summary elements
+    const summaryAmount = document.getElementById('summaryAmount');
+    const summaryFrequency = document.getElementById('summaryFrequency');
+    const summaryDesignation = document.getElementById('summaryDesignation');
+    const summaryTotal = document.getElementById('summaryTotal');
+
+    // ==========================================
+    // AMOUNT SELECTION
+    // ==========================================
+    amountCards.forEach(card => {
+        card.addEventListener('click', function() {
+            amountCards.forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            customAmountInput.value = '';
+            donationData.amount = parseInt(this.dataset.amount);
+            updateSummary();
+        });
+    });
+
+    customAmountInput.addEventListener('input', function() {
+        amountCards.forEach(c => c.classList.remove('selected'));
+        donationData.amount = parseInt(this.value) || 0;
+        updateSummary();
+    });
+
+    // Frequency selection
+    document.querySelectorAll('input[name="frequency"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            donationData.frequency = this.value;
+            updateSummary();
+        });
+    });
+
+    // Designation selection
+    document.querySelectorAll('input[name="designation"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            donationData.designation = this.value;
+            updateSummary();
+        });
+    });
+
+    // ==========================================
+    // NAVIGATION
+    // ==========================================
+    continueBtn.addEventListener('click', function() {
+        if (donationData.amount < 1000) {
+            alert('Please select or enter a donation amount (minimum ₦1,000)');
+            return;
+        }
+        step1.classList.remove('active');
+        step2.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    backBtn.addEventListener('click', function() {
+        step2.classList.remove('active');
+        step1.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ==========================================
+    // PAYSTACK PAYMENT
+    // ==========================================
+    payBtn.addEventListener('click', function() {
+        // Validate donor information
+        const name = document.getElementById('donorName').value.trim();
+        const email = document.getElementById('donorEmail').value.trim();
+        
+        if (!name || !email) {
+            alert('Please provide your name and email address');
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Update donation data
+        donationData.name = name;
+        donationData.email = email;
+        donationData.phone = document.getElementById('donorPhone').value.trim();
+        donationData.location = document.getElementById('donorLocation').value.trim();
+        donationData.dedication = document.getElementById('dedication').value.trim();
+        donationData.anonymous = document.getElementById('anonymous').checked;
+        donationData.newsletter = document.getElementById('newsletter').checked;
+
+        // Initialize Paystack payment
+        initializePaystackPayment();
+    });
+
+    function initializePaystackPayment() {
+        const amountInKobo = donationData.amount * 100; // Paystack expects amount in kobo (smallest currency unit)
+        
+        const handler = PaystackPop.setup({
+            key: PAYSTACK_PUBLIC_KEY,
+            email: donationData.email,
+            amount: amountInKobo,
+            currency: 'NGN',
+            ref: 'CAF-' + Math.floor((Math.random() * 1000000000) + 1), // Generate unique reference
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name: 'Donor Name',
+                        variable_name: 'donor_name',
+                        value: donationData.name
+                    },
+                    {
+                        display_name: 'Frequency',
+                        variable_name: 'frequency',
+                        value: donationData.frequency
+                    },
+                    {
+                        display_name: 'Designation',
+                        variable_name: 'designation',
+                        value: donationData.designation === 'scholarship' ? 'Scholarship Fund' : 
+                               donationData.designation === 'charity' ? 'Charity Initiative' : 'Where Needed Most'
+                    },
+                    {
+                        display_name: 'Phone',
+                        variable_name: 'phone',
+                        value: donationData.phone || 'Not provided'
+                    },
+                    {
+                        display_name: 'Location',
+                        variable_name: 'location',
+                        value: donationData.location || 'Not provided'
+                    },
+                    {
+                        display_name: 'Dedication',
+                        variable_name: 'dedication',
+                        value: donationData.dedication || 'None'
+                    },
+                    {
+                        display_name: 'Anonymous',
+                        variable_name: 'anonymous',
+                        value: donationData.anonymous ? 'Yes' : 'No'
+                    }
+                ]
+            },
+            callback: function(response) {
+                // Payment successful
+                handlePaymentSuccess(response);
+            },
+            onClose: function() {
+                // Payment cancelled
+                alert('Transaction was not completed.');
+            }
+        });
+        
+        handler.openIframe();
+    }
+
+    // ==========================================
+    // PAYMENT HANDLERS
+    // ==========================================
+    function handlePaymentSuccess(response) {
+        // Show loading state
+        step2.classList.remove('active');
+        loadingStep.classList.add('active');
+        
+        // TODO: Send transaction details to your backend for verification
+        // The response.reference should be verified on your server
+        console.log('Payment successful!', response);
+        
+        // Simulate server verification (replace with actual API call)
+        setTimeout(() => {
+            verifyPayment(response.reference);
+        }, 2000);
+    }
+
+    function verifyPayment(reference) {
+        // TODO: Replace this with actual backend verification
+        // Example:
+        // fetch('/api/verify-payment', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ reference: reference })
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if (data.status === 'success') {
+        //         showSuccessMessage();
+        //     }
+        // });
+        
+        // For now, show success message
+        showSuccessMessage();
+    }
+
+    function showSuccessMessage() {
+        const designationText = donationData.designation === 'scholarship' ? 'the Scholarship Fund' :
+                               donationData.designation === 'charity' ? 'the Charity Initiative' : 'where it\'s needed most';
+        
+        loadingStep.innerHTML = `
+            <div class="success-message">
+                <div class="success-icon">✓</div>
+                <h2>Thank You for Your Generous Donation!</h2>
+                <p>Your contribution of <strong>₦${donationData.amount.toLocaleString()}</strong> to <strong>${designationText}</strong> will make a real difference in the lives of students and communities across Cross River State.</p>
+                <p>A receipt has been sent to <strong>${donationData.email}</strong></p>
+                <div class="cta-row" style="justify-content:center;margin-top:2rem">
+                    <a href="index.html" class="btn btn-primary">Return Home</a>
+                    <a href="donate.html" class="btn btn-secondary">Make Another Donation</a>
+                </div>
+            </div>
+        `;
+    }
+
+    // ==========================================
+    // UPDATE SUMMARY
+    // ==========================================
+    function updateSummary() {
+        const formattedAmount = '₦' + donationData.amount.toLocaleString();
+        summaryAmount.textContent = formattedAmount;
+        summaryTotal.textContent = formattedAmount;
+        summaryFrequency.textContent = donationData.frequency === 'one-time' ? 'One-time' : 'Monthly';
+        
+        // Update designation
+        const designationLabel = donationData.designation === 'scholarship' ? 'Scholarship Fund' :
+                                donationData.designation === 'charity' ? 'Charity Initiative' : 'Where Needed Most';
+        summaryDesignation.textContent = designationLabel;
+    }
+
+    // ==========================================
+    // HEADER SCROLL EFFECT
+    // ==========================================
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Initialize with default amount selected
+   updateSummary()
+    </script>
+</body>
+</html>
