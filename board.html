@@ -17,11 +17,13 @@
         <div class="slide"></div>
     </div>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="mobile-menu-overlay"></div>
     <header class="site-header">
         <div class="container">
             <div class="brand">
                 <a href="index.html" class="logo" aria-label="Home">CAF</a>
             </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span>☰</span></button>
             <nav class="site-nav" aria-label="Primary">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -211,6 +213,9 @@
             }
         }
     });
+
+    // Mobile menu
+    (function(){const t=document.querySelector('.mobile-menu-toggle'),e=document.querySelector('.site-nav'),o=document.querySelector('.mobile-menu-overlay'),n=document.body;function a(){const i=e.classList.contains('active');i?(e.classList.remove('active'),o.classList.remove('active'),t.setAttribute('aria-expanded','false'),n.style.overflow=''):(e.classList.add('active'),o.classList.add('active'),t.setAttribute('aria-expanded','true'),n.style.overflow='hidden')}t&&t.addEventListener('click',a),o&&o.addEventListener('click',a),e.querySelectorAll('a').forEach(t=>t.addEventListener('click',function(){window.innerWidth<=968&&a()})),window.addEventListener('resize',function(){window.innerWidth>968&&e.classList.contains('active')&&a()})})();
 
     // Page transition animations
     (function() {
