@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+    <!-- Page transition overlay -->
+    <div class="page-transition-overlay"></div>
+    
     <div class="bg-slideshow">
         <div class="slide"></div>
         <div class="slide"></div>
@@ -175,6 +178,45 @@
             }
         }
     });
+
+    // Page transition animations
+    (function() {
+        const overlay = document.querySelector('.page-transition-overlay');
+        
+        // Handle all internal link clicks
+        document.addEventListener('click', function(e) {
+            let link = e.target.closest('a');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            
+            // Check if it's an internal link
+            if (!href || 
+                href.startsWith('#') || 
+                href.startsWith('http://') || 
+                href.startsWith('https://') ||
+                href.startsWith('mailto:') ||
+                href.startsWith('tel:') ||
+                link.target === '_blank') {
+                return;
+            }
+            
+            // Prevent default and animate
+            e.preventDefault();
+            overlay.classList.add('active');
+            
+            setTimeout(function() {
+                window.location.href = href;
+            }, 400);
+        });
+        
+        // Handle back/forward button
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                overlay.classList.remove('active');
+            }
+        });
+    })();
     </script>
 </body>
 </html>
