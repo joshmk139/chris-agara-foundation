@@ -23,11 +23,17 @@
     </div>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu-overlay"></div>
+    
     <header class="site-header">
         <div class="container">
             <div class="brand">
                 <a href="index.html" class="logo" aria-label="Home">CAF</a>
             </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span>☰</span>
+            </button>
             <nav class="site-nav" aria-label="Primary">
                 <ul>
                     <li><a href="index.html" aria-current="page">Home</a></li>
@@ -178,6 +184,55 @@
             }
         }
     });
+
+    // Mobile menu toggle
+    (function() {
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        const menuOverlay = document.querySelector('.mobile-menu-overlay');
+        const body = document.body;
+        
+        function toggleMenu() {
+            const isOpen = siteNav.classList.contains('active');
+            
+            if (isOpen) {
+                siteNav.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                body.style.overflow = '';
+            } else {
+                siteNav.classList.add('active');
+                menuOverlay.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', 'true');
+                body.style.overflow = 'hidden';
+            }
+        }
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMenu);
+        }
+        
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', toggleMenu);
+        }
+        
+        // Close menu when clicking nav links
+        const navLinks = siteNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 968) {
+                    toggleMenu();
+                }
+            });
+        });
+        
+        // Close menu on window resize to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 968 && siteNav.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    })();
 
     // Page transition animations
     (function() {
